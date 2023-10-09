@@ -1,0 +1,74 @@
+[gd_scene load_steps=8 format=3 uid="uid://n2kc46aknkr8"]
+
+[ext_resource type="Texture2D" uid="uid://d0i4brbltyngw" path="res://Assets/Tiles/Seasonal Tilesets/5 - Misc. universal tiles/Blocks (16 x 16).png" id="1_cqt6c"]
+[ext_resource type="Script" path="res://Scripts/feather_spining.gd" id="1_kyee4"]
+[ext_resource type="AudioStream" uid="uid://d3n2th0d5x7f2" path="res://Assets/SFX/FX/pickupCoin (1).wav" id="3_verxk"]
+
+[sub_resource type="Animation" id="Animation_kpcrm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_yp33y"]
+resource_name = "feather_spinning"
+length = 1.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 3, 6, 3, 1, 0, 1, 3, 6, 5, 3, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7y5jc"]
+_data = {
+"RESET": SubResource("Animation_kpcrm"),
+"feather_spinning": SubResource("Animation_yp33y")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3yjrr"]
+size = Vector2(16, 16)
+
+[node name="FeatherSpining" type="Node2D"]
+script = ExtResource("1_kyee4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_cqt6c")
+centered = false
+hframes = 7
+region_enabled = true
+region_rect = Rect2(0, 32, 112, 16)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7y5jc")
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_3yjrr")
+
+[node name="CoinSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_verxk")
+volume_db = -10.0
+
+[connection signal="area_entered" from="Area2D" to="." method="player_area_entered"]

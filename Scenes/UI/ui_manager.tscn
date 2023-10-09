@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://ioewxxlkiwgu"]
+
+[ext_resource type="Script" path="res://Scripts/UI_scripts/ui_manager.gd" id="1_4x13e"]
+[ext_resource type="Texture2D" uid="uid://dd6hk2e0tc1qv" path="res://Assets/Tiles/Seasonal Tilesets/5 - Misc. universal tiles/feather_icon.png" id="1_biopt"]
+[ext_resource type="FontFile" uid="uid://nf03n62pni1q" path="res://Assets/Fonts/ThaleahFat/ThaleahFat.ttf" id="2_saodr"]
+[ext_resource type="AudioStream" uid="uid://d3n2th0d5x7f2" path="res://Assets/SFX/FX/pickupCoin (1).wav" id="4_q36ft"]
+
+[node name="UIManager" type="CanvasLayer"]
+script = ExtResource("1_4x13e")
+
+[node name="FeatherIcon" type="TextureRect" parent="."]
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 20.0
+offset_bottom = 19.0
+texture = ExtResource("1_biopt")
+
+[node name="FeatherDisplay" type="Label" parent="."]
+offset_left = 25.0
+offset_top = 3.0
+offset_right = 65.0
+offset_bottom = 43.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_saodr")
+theme_override_font_sizes/font_size = 20
+text = "0"
+
+[node name="coinSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_q36ft")
+volume_db = -15.0
