@@ -10,5 +10,6 @@ func _process(_delta):
 
 func player_area_entered(_area):
 	GameManagement.gain_feather(1)
+	GameManagement.gain_score(50)
 	queue_free()
 

@@ -1,6 +1,9 @@
 extends Node2D
 
+@onready var animated_heart = $AnimatedHeart
 
+func _ready():
+	animated_heart.play("heart_shrink")
 
 func _on_area_2d_area_entered(area:Area2D):
 	if area.get_parent() is Player:

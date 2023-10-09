@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dybblkcd3m8ld"]
+[gd_scene load_steps=34 format=3 uid="uid://dybblkcd3m8ld"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_28akh"]
 [ext_resource type="Texture2D" uid="uid://bn37gri8pjkwn" path="res://Assets/Player/free-pixel-art-tiny-hero-sprites/2 Owlet_Monster/Owlet_Monster_Idle_4.png" id="1_l2gyf"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://u47oumfdpp1v" path="res://Assets/Player/free-pixel-art-tiny-hero-sprites/2 Owlet_Monster/Owlet_Monster_Death_8.png" id="10_lge50"]
 [ext_resource type="Texture2D" uid="uid://iqq1hthokkg2" path="res://Assets/Player/free-pixel-art-tiny-hero-sprites/2 Owlet_Monster/Owlet_Monster_Hurt_4.png" id="11_t5dkv"]
 [ext_resource type="AudioStream" uid="uid://c1iun23mpnj8x" path="res://Assets/SFX/FX/jump.wav" id="12_wil1l"]
+[ext_resource type="PackedScene" uid="uid://cqaprliod4a1h" path="res://Scenes/UI/health_bar.tscn" id="13_7ndna"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uof7y"]
 size = Vector2(11, 20)
@@ -249,6 +250,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:hit")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_g05wh"]
@@ -610,7 +623,7 @@ size = Vector2(9, 18)
 size = Vector2(9, 18)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cxu3w"]
-radius = 8.0
+radius = 19.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
@@ -686,11 +699,15 @@ shape = SubResource("RectangleShape2D_dbhks")
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
-position = Vector2(14, -10)
+position = Vector2(-1, -10)
 shape = SubResource("CircleShape2D_cxu3w")
 
 [node name="JumpSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_wil1l")
 volume_db = -15.0
+
+[node name="HealthBar" parent="." instance=ExtResource("13_7ndna")]
+offset_top = -32.0
+offset_bottom = -32.0
 
 [connection signal="area_entered" from="HazardDetector" to="." method="_on_hazard_detector_area_entered"]

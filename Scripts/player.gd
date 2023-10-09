@@ -19,20 +19,21 @@ var can_take_damage = true
 @onready var coyote_jump_timer = $CoyoteJumpTimer
 @onready var starting_position = global_position
 @onready var jumpSFX: AudioStreamPlayer = $JumpSFX
+@onready var attack_hitbox : CollisionShape2D = $CollisionShape2D
+@onready var health_bar = $HealthBar
 
 @export var movement_data : PlayerMovementData
 @export var attacking = false
 @export var death = false
+@export var hit = false
 
 func _ready():
 	health = max_health
+	
 
 func _process(_delta):
-	if Input.is_action_just_pressed("attack"):
+	if Input.is_action_just_pressed("attack") and !hit:
 		attack()
-	
-	# if death:
-	# 	animation_player.play("die")
 
 func _physics_process(delta):
 	handle_gravity(delta)
@@ -56,7 +57,7 @@ func _physics_process(delta):
 
 
 func update_animations(direction):
-	if !attacking and !death:
+	if !attacking and !death and !hit:
 		if is_on_floor():
 			if direction == 0:
 				animation_player.play("idle")
@@ -150,7 +151,7 @@ func attack():
 
 	for area in overLapping_objects:
 		if area.get_parent().is_in_group("Enemies"):
-			area.get_parent().die()
+			area.get_parent().take_damage(1)
 
 	attacking = true
 	animation_player.play("attack")
@@ -159,15 +160,18 @@ func attack():
 func take_damage(damage_amaount : int):
 	if can_take_damage:
 		iFrames()
+		hit = true
+		attacking = false
+		animation_player.play("hurt")
 		health -= damage_amaount
+
+		get_node("HealthBar").update_health_bar(health, max_health)
+		
 		if health <= 0:
 			death = true
 			if death:
 				animation_player.play("die")
-			
-			# starting_point()
 
-		
 
 func iFrames():
 	can_take_damage = false
@@ -181,6 +185,8 @@ func _on_hazard_detector_area_entered(_area:Area2D):
 
 func starting_point():
 		death = false
+		attacking = false
+		hit = false
 		global_position = starting_position
 		health = max_health
 

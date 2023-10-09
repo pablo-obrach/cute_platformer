@@ -1,16 +1,17 @@
-[gd_scene load_steps=13 format=3 uid="uid://qf81vh6wuea2"]
+[gd_scene load_steps=14 format=3 uid="uid://qf81vh6wuea2"]
 
 [ext_resource type="Texture2D" uid="uid://djmibrwb1edsv" path="res://Assets/Enemies/Pixel Adventure 2/Enemies/Mushroom/Idle (32x32).png" id="1_jb8ep"]
 [ext_resource type="Script" path="res://Scripts/shroom_enemy.gd" id="1_n68vv"]
 [ext_resource type="Texture2D" uid="uid://b7ar3bhi281g8" path="res://Assets/Enemies/Pixel Adventure 2/Enemies/Mushroom/Run (32x32).png" id="3_36d54"]
 [ext_resource type="Texture2D" uid="uid://b2qr7m7lmtgfy" path="res://Assets/Enemies/Pixel Adventure 2/Enemies/Mushroom/Hit.png" id="4_p7cqm"]
 [ext_resource type="AudioStream" uid="uid://cg7spyqkgbhi1" path="res://Assets/SFX/FX/hitHurt.wav" id="5_w3ykq"]
+[ext_resource type="PackedScene" uid="uid://cqaprliod4a1h" path="res://Scenes/UI/health_bar.tscn" id="6_kxyd3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w8m1u"]
-size = Vector2(20, 19)
+size = Vector2(26, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_75h0t"]
-size = Vector2(24, 15.5)
+size = Vector2(26, 20)
 
 [sub_resource type="Animation" id="Animation_c40pa"]
 length = 0.001
@@ -122,11 +123,14 @@ tracks/4/path = NodePath(".")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.5),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
-"method": &"queue_free"
+"method": &"get_hit"
+}, {
+"args": [],
+"method": &"get_hit"
 }]
 }
 
@@ -253,13 +257,13 @@ texture = ExtResource("1_jb8ep")
 hframes = 14
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 6.5)
+position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_w8m1u")
 
 [node name="ShroomHitBox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShroomHitBox"]
-position = Vector2(0, 5.75)
+position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_75h0t")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -284,5 +288,9 @@ target_position = Vector2(6.11959e-07, 14)
 [node name="HittedEnemy" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_w3ykq")
 volume_db = -10.0
+
+[node name="HealthBar" parent="." instance=ExtResource("6_kxyd3")]
+offset_top = -8.0
+offset_bottom = -8.0
 
 [connection signal="area_entered" from="ShroomHitBox" to="." method="_on_shroom_hit_box_area_entered"]
