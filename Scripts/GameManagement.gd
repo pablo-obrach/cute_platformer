@@ -1,8 +1,8 @@
 extends Node
 
-
 signal collected_feather(int)
 signal score_update(int)
+
 
 var feather: int
 var score: int = 0
@@ -13,6 +13,7 @@ var score_label
 
 var paused = false
 
+	
 func gain_score(score_gained:int):
 	score += score_gained
 	emit_signal("score_update",score_gained)
@@ -28,6 +29,7 @@ func pause_play():
 	if paused:
 		get_tree().paused = true
 		pause_menu.visible = paused
+
 	else:
 		get_tree().paused = false
 		pause_menu.visible = paused

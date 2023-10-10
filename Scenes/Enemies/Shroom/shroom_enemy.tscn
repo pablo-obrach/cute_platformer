@@ -133,6 +133,21 @@ tracks/4/keys = {
 "method": &"get_hit"
 }]
 }
+tracks/5/type = "audio"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HittedEnemy")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_w3ykq")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/5/use_blend = true
 
 [sub_resource type="Animation" id="Animation_ihovt"]
 resource_name = "shroom_idle"
@@ -286,7 +301,6 @@ rotation = -1.5708
 target_position = Vector2(6.11959e-07, 14)
 
 [node name="HittedEnemy" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_w3ykq")
 volume_db = -10.0
 
 [node name="HealthBar" parent="." instance=ExtResource("6_kxyd3")]

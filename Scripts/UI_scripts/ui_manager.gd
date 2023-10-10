@@ -1,16 +1,22 @@
 extends CanvasLayer
+class_name UIManager
+
 
 @onready var featherSFX: AudioStreamPlayer = $coinSFX
-
+@onready var buttonResume = %Resume
 
 func _ready():
 	GameManagement.collected_feather.connect(update_father_display)
 	GameManagement.pause_menu = $PauseMenu
 	GameManagement.score_update.connect(update_score_display)
+	
+
 
 func _process(_delta):
 	if Input.is_action_just_pressed("pause"):
+		buttonResume.grab_focus()
 		GameManagement.pause_play()
+
 
 func update_father_display(_collected_feather):
 	featherSFX.play()

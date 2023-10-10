@@ -85,7 +85,6 @@ func get_hit():
 
 func die():
 	death = true
-	GameManagement.gain_score(100)
 	speed = 0
-	hittedEnemy.play()
+	GameManagement.gain_score(100)
 	queue_free()

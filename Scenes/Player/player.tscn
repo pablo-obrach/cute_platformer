@@ -674,7 +674,7 @@ wait_time = 0.15
 one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(1, -46)
+position = Vector2(0, -25)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 editor_draw_limits = true
@@ -699,7 +699,7 @@ shape = SubResource("RectangleShape2D_dbhks")
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
-position = Vector2(-1, -10)
+position = Vector2(-1, -7)
 shape = SubResource("CircleShape2D_cxu3w")
 
 [node name="JumpSFX" type="AudioStreamPlayer" parent="."]

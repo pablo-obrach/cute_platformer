@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b7ob8rmyuc2m5"]
+[gd_scene load_steps=10 format=3 uid="uid://b7ob8rmyuc2m5"]
 
 [ext_resource type="PackedScene" uid="uid://bsgmxt818lau1" path="res://Scenes/World/world.tscn" id="1_8q7gk"]
 [ext_resource type="PackedScene" uid="uid://dsxk48y01rvfy" path="res://Scenes/Backgrounds/LevelOne/parallax_background_grass.tscn" id="2_dcq0w"]
@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://wy5cqqjcn7nb" path="res://Assets/SFX/Music/You_re in the Future.ogg" id="6_6183w"]
 [ext_resource type="PackedScene" uid="uid://cjp5hfdxx263a" path="res://Scenes/Objects/Collectibles/helth_up.tscn" id="7_dtefb"]
 [ext_resource type="PackedScene" uid="uid://d2td84n08yh04" path="res://Scenes/Objects/Platforms/detroyable_platform.tscn" id="8_wwcyp"]
+[ext_resource type="PackedScene" uid="uid://bfffqx5sge7xg" path="res://Scenes/Objects/JumpPad/jump_pad.tscn" id="9_kp40w"]
 
 [node name="LevelOne" instance=ExtResource("1_8q7gk")]
 
@@ -214,5 +215,8 @@ position = Vector2(-656, 118)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="9"]
 stream = ExtResource("6_6183w")
-volume_db = -20.0
+volume_db = -15.0
 autoplay = true
+
+[node name="JumpPad" parent="." index="10" instance=ExtResource("9_kp40w")]
+position = Vector2(-155, 128)
